@@ -1,66 +1,62 @@
 <template>
   <div class="contact">
     <h2>Yhteystiedot</h2>
-    <p>Voit ottaa meihin yhteyttä seuraavasti:</p>
+    <p>Voit ottaa minuun yhteyttä seuraavasti:</p>
 
     <ul>
       <li><strong>Sähköposti:</strong> info@example.com</li>
       <li><strong>Puhelin:</strong> +358 123 456 789</li>
       <li><strong>Osoite:</strong> Esimerkkikatu 12, 00100 Helsinki</li>
     </ul>
-
-    <h3>Ota yhteyttä</h3>
-    <form @submit.prevent="sendMessage">
-      <input v-model="contact.name" placeholder="Nimi" required />
-      <input v-model="contact.email" type="email" placeholder="Sähköposti" required />
-      <textarea v-model="contact.message" placeholder="Viesti" required></textarea>
-      <button type="submit">Lähetä</button>
-    </form>
-
-    <p v-if="responseMessage">{{ responseMessage }}</p>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      contact: { name: '', email: '', message: '' },
-      responseMessage: ''
-    };
-  },
-  methods: {
-    sendMessage() {
-      this.responseMessage = 'Viesti lähetetty! Otamme sinuun yhteyttä pian.';
-      this.contact = { name: '', email: '', message: '' };
-    }
-  }
-};
-</script>
-
 <style scoped>
   .contact {
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
-    padding: 20px;
-  }
-
-  form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background: var(--color-background-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  h2 {
+    color: var(--color-heading);
+    font-size: 2em;
+  }
+
+  ul {
+    text-align: left;
+    margin: 20px 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li {
+    margin-bottom: 8px;
   }
 
   button {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--vt-c-indigo);
+    color: var(--vt-c-white);
     padding: 10px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
   }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: var(--vt-c-black-soft);
     }
+
+  p {
+    color: var(--color-text);
+    margin-top: 15px;
+  }
 </style>

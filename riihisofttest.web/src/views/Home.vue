@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <h1>Welcome to Our Website</h1>
-    <p>We are glad you're here. Explore our site to know more about us!</p>
+    <h1>Tervetuloa Nikon testisivulle!</h1>
+    <p>Tällä sivulla voit antaa palautetta, tai lukea jo annettuja palautteita.</p>
 
     <div class="links">
-      <router-link to="/about" class="link">About Us</router-link>
-      <router-link to="/contact" class="link">Contact Us</router-link>
-      <router-link to="/feedback" class="link">Give Feedback</router-link>
-      <router-link to="/feedback-list" class="link">View Feedback</router-link>
+      <router-link to="/about" class="link">Minusta</router-link>
+      <router-link to="/contact" class="link">Yhteystiedot</router-link>
+      <router-link to="/feedback" class="link">Anna palautetta</router-link>
+      <router-link to="/feedback-list" class="link">Lue palautteita</router-link>
     </div>
   </div>
 </template>
@@ -20,12 +20,17 @@ export default {
 
 <style scoped>
   .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     text-align: center;
     padding: 20px;
   }
 
   h1 {
-    color: #2c3e50;
+    color: var(--color-heading);
     font-size: 2.5em;
   }
 
@@ -40,7 +45,7 @@ export default {
 
   .link {
     font-size: 1.1em;
-    color: #42b983;
+    color: var(--vt-c-indigo);
     margin: 0 15px;
     text-decoration: none;
   }

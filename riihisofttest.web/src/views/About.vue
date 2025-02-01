@@ -7,6 +7,11 @@
 
 <style scoped>
   .about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     text-align: center;
     padding: 20px;
   }
