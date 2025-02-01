@@ -1,5 +1,4 @@
-﻿//using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RiihiSoftTest.Api.Data;
 using RiihiSoftTest.Api.Models;

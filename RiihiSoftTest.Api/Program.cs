@@ -10,6 +10,18 @@ namespace RiihiSoftTest.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:50995", "https://localhost:50995")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                    });
+            });
+
+
             // Add services to the container.
             builder.Services.AddDbContext<FeedbackDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -27,6 +39,8 @@ namespace RiihiSoftTest.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("AllowFrontend");
 
             app.UseHttpsRedirection();
 
