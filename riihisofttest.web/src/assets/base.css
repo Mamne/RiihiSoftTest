@@ -84,3 +84,17 @@ input, textarea {
     border-radius: 4px;
     width: 100%;
 }
+
+.back-button {
+    padding: 10px 20px;
+    background-color: var(--vt-c-indigo);
+    color: var(--vt-c-white);
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+}
+
+    .back-button:hover {
+        background-color: var(--vt-c-black-soft);
+    }

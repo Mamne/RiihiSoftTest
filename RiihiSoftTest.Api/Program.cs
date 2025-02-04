@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using RiihiSoftTest.Api.Data;
+using RiihiSoftTest.Api.Interfaces;
+using RiihiSoftTest.Api.Services;
 
 namespace RiihiSoftTest.Api
 {
@@ -23,6 +25,7 @@ namespace RiihiSoftTest.Api
 
 
             // Add services to the container.
+            builder.Services.AddScoped<IFeedbackService, FeedbackService>();
             builder.Services.AddDbContext<FeedbackDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -40,12 +43,17 @@ namespace RiihiSoftTest.Api
                 app.UseSwaggerUI();
             }
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<FeedbackDbContext>();
+                dbContext.Database.EnsureCreated();
+            }
+
             app.UseCors("AllowFrontend");
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

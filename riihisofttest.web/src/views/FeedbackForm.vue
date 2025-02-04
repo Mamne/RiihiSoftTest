@@ -2,8 +2,14 @@
   <div class="feedback-form">
     <h2>Anna palautetta</h2>
     <form @submit.prevent="submitFeedback">
-      <input v-model="feedback.sendersName" placeholder="Nimi" required />
-      <input v-model="feedback.sendersEmail" type="email" placeholder="Sähköposti" required />
+      <input v-model="feedback.sendersName" placeholder="Nimi" required maxlength="50" />
+      <p v-if="feedback.sendersName.length >= 50" class="warning">
+        Nimi voi olla enintään 50 merkkiä.
+      </p>
+      <input v-model="feedback.sendersEmail" type="email" placeholder="Sähköposti" maxlength="50" />
+      <p v-if="feedback.sendersEmail.length >= 100" class="warning">
+        Sähköposti voi olla enintään 50 merkkiä.
+      </p>
       <textarea v-model="feedback.text" placeholder="Viesti" required></textarea>
       <button type="submit" :disabled="isSubmitting">
         {{ isSubmitting ? 'Lähetetään...' : 'Lähetä' }}
@@ -37,7 +43,8 @@
         this.successMessage = '';
 
         try {
-          await axios.post('https://localhost:7185/api/feedback', this.feedback);
+          const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+          await axios.post(`${apiBaseUrl}/feedback`, this.feedback);
           this.successMessage = 'Palautteesi on lähetetty!';
           this.feedback = { sendersName: '', sendersEmail: '', text: '' };
         } catch (error) {
@@ -62,12 +69,21 @@
 
   input, textarea {
     width: 100%;
+    max-width: 100%;
     margin-bottom: 10px;
     padding: 8px;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     background: var(--color-background);
+    box-sizing: border-box;
   }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    overflow-wrap: break-word;
+  }
+
 
   button {
     width: 100%;
@@ -99,16 +115,4 @@
     margin-top: 15px;
   }
 
-  .back-button {
-    padding: 10px 20px;
-    background-color: var(--vt-c-indigo);
-    color: var(--vt-c-white);
-    text-decoration: none;
-    border-radius: 4px;
-    text-align: center;
-  }
-
-    .back-button:hover {
-      background-color: var(--vt-c-black-soft);
-    }
 </style>

@@ -8,6 +8,10 @@
       <li><strong>Puhelin:</strong> +358 123 456 789</li>
       <li><strong>Osoite:</strong> Esimerkkikatu 12, 00100 Helsinki</li>
     </ul>
+
+    <div class="back-button-container">
+      <router-link to="/" class="back-button">Palaa etusivulle</router-link>
+    </div>
   </div>
 </template>
 
@@ -40,23 +44,16 @@
 
   li {
     margin-bottom: 8px;
-  }
-
-  button {
-    background-color: var(--vt-c-indigo);
-    color: var(--vt-c-white);
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-    button:hover {
-      background-color: var(--vt-c-black-soft);
-    }
+  }  
 
   p {
     color: var(--color-text);
     margin-top: 15px;
+  }
+
+  .back-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 </style>
