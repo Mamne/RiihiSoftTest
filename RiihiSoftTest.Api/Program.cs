@@ -6,7 +6,7 @@ using RiihiSoftTest.Api.Services;
 
 namespace RiihiSoftTest.Api
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -42,13 +42,13 @@ namespace RiihiSoftTest.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<FeedbackDbContext>();
                 dbContext.Database.EnsureCreated();
             }
-
+            
             app.UseCors("AllowFrontend");
 
             app.UseHttpsRedirection();

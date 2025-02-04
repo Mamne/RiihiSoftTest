@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="homePage">
     <h1>Tervetuloa Nikon testisivulle!</h1>
     <p>Tällä sivulla voit antaa palautetta, tai lukea jo annettuja palautteita.</p>
 
@@ -14,12 +14,12 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'HomePage',
 };
 </script>
 
 <style scoped>
-  .home {
+  .homePage {
     display: flex;
     flex-direction: column;
     justify-content: center;

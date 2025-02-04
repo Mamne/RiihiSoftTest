@@ -23,15 +23,29 @@ namespace RiihiSoftTest.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var createdFeedback = await _feedbackService.AddFeedbackAsync(feedback);
-            return CreatedAtAction(nameof(GetFeedback), new { id = createdFeedback.Id }, createdFeedback);
+            try
+            {
+                var createdFeedback = await _feedbackService.AddFeedbackAsync(feedback);
+                return CreatedAtAction(nameof(GetFeedback), new { id = createdFeedback.Id }, createdFeedback);
+            }
+            catch (Exception)
+            {
+                return Problem("An unexpected error occurred while processing your request.", statusCode: 500);
+            }
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Feedback>>> GetFeedback()
         {
-            var feedbacks = await _feedbackService.GetAllFeedbacksAsync();
-            return Ok(feedbacks);
+            try
+            {
+                var feedbacks = await _feedbackService.GetAllFeedbacksAsync();
+                return Ok(feedbacks);
+            }
+            catch (Exception)
+            {
+                return Problem("An unexpected error occurred while retrieving feedback.", statusCode: 500);
+            }
         }
 
         [HttpGet("paginated")]
@@ -42,16 +56,23 @@ namespace RiihiSoftTest.Api.Controllers
                 return BadRequest("Page number and page size must be greater than 0.");
             }
 
-            var feedbacks = await _feedbackService.GetPaginatedFeedbacksAsync(pageNumber, pageSize);
-            var totalCount = await _feedbackService.GetTotalFeedbackCountAsync();
-
-            var response = new PaginatedFeedbackResponse
+            try
             {
-                Feedbacks = feedbacks,
-                TotalCount = totalCount
-            };
+                var feedbacks = await _feedbackService.GetPaginatedFeedbacksAsync(pageNumber, pageSize);
+                var totalCount = await _feedbackService.GetTotalFeedbackCountAsync();
 
-            return Ok(response);
+                var response = new PaginatedFeedbackResponse
+                {
+                    Feedbacks = feedbacks,
+                    TotalCount = totalCount
+                };
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return Problem("An unexpected error occurred while trying to retrieve the paginated feedbacks.", statusCode: 500);
+            }
         }
     }
 }
